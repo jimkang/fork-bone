@@ -3,6 +3,7 @@ var ForkBone = require('../index');
 var forkToHTML = require('../tools/fork-to-html');
 var fs = require('fs');
 var queue = require('d3-queue').queue;
+var seedrandom = require('seedrandom');
 
 const tolerance = 0.001;
 var resultHTMLFragments = [];
@@ -10,6 +11,7 @@ var resultHTMLFragments = [];
 var testCases = [
   {
     name: '45 degree angle bone',
+    seed: 'asdf',
     opts: {
       line: [
         [30, 50],
@@ -17,10 +19,7 @@ var testCases = [
       ],
       lengthRange: [20, 48]
     },
-    expected: [
-      [20, 20],
-      [1, 1]
-    ]
+    expected: [ [ -30, 25 ], [ -3, -10 ] ]
   },
 
 ];
@@ -40,7 +39,7 @@ function runTest(testCase, done) {
 
   function basicTest(t) {
     var forkBone = ForkBone({
-
+      random: seedrandom(testCase.seed)
     });
     var forkPoints = forkBone(testCase.opts);
 

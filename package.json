@@ -21,6 +21,7 @@
     "d3-queue": "^3.0.1",
     "d3-shape": "^1.0.0",
     "scale-to-fit": "^1.0.3",
+    "seedrandom": "^2.4.2",
     "tape": "^4.6.0"
   },
   "dependencies": {
