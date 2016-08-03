@@ -42,8 +42,8 @@ function bendToHTML(opts, done) {
     <svg width="${boardWidth}" height="${boardHeight}">
       <g transform="matrix(${matrixPoints.join(' ')})">
         <path d=${line(originalLine)} class="original-line"></path>
-        <path d=${line(branchC)} class="widen-line"></path>
-        <path d=${line(branchD)} class="widen-line"></path>
+        <path d=${line(branchC)} class="fork-line"></path>
+        <path d=${line(branchD)} class="fork-line"></path>
         <circle r="1" cx="${forkPoints[0][0]}" cy="${forkPoints[0][1]}" class="widen-point"></circle>
         <circle r="1" cx="${forkPoints[1][0]}" cy="${forkPoints[1][1]}" class="widen-point"></circle>
       </g>

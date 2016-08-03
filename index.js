@@ -24,52 +24,44 @@ function ForkBone(createOpts) {
     }
 
     var ab = subtractPairs(b, a);
-    var xCD = getXForCAndD(ab, b, extensionExtent);
-    var yCD = getYForCAndD(ab, b, extensionExtent);
-    var c = [xCD[0], yCD[0]];
-    var d = [xCD[1], yCD[1]];
-    return [c, d];
+    var forkVectors = getForkVectors(ab);
+
+    return [
+      addPairs(b, forkVectors[0]),
+      addPairs(b, forkVectors[1])
+    ];
 
     function normalizePointToAB(point) {
       return point * magnitudeRatioABToBC;
     }
   }
 
-  function getXForCAndD(ab, b, extensionExtent) {
-    var cExtension = probable.roll(extensionExtent);
-    var dExtension = probable.roll(extensionExtent);
-    var cx = 0;
-    var dx = 0;
+  function getForkVectors(guide) {
+    // var cExtension = probable.roll(extensionExtent);
+    // var dExtension = probable.roll(extensionExtent);
+    // var c = [0, 0];
+    // var d = [0, 0];
 
-    if (ab[0] < 0) {
-      cx = b[0] - cExtension;
-      dx = b[0] + dExtension;
-    }
-    else {
-      cx = b[0] + cExtension;
-      dx = b[0] - dExtension;      
-    }
-
-    return [cx, dx];
+    return [
+      [
+        between(guide[0], guide[1]),
+        between(guide[1], -guide[0])
+        // guide[1] + probable.roll(-guide[0] - guide[1])
+      ],
+      [
+        between(guide[0], -guide[1]),
+        between(guide[1], guide[0])
+      ]
+    ];
   }
 
-  function getYForCAndD(ab, b, extensionExtent) {
-    var cExtension = probable.roll(extensionExtent);
-    var dExtension = probable.roll(extensionExtent);
-    var cy = 0;
-    var dy = 0;
-
-    if (ab[1] < 0) {
-      cy = b[1] + cExtension;
-      dy = b[1] - dExtension;
-    }
-    else {
-      cy = b[1] - cExtension;
-      dy = b[1] + dExtension;      
-    }
-
-    return [cy, dy];
-  }  
+  function between(a, b) {
+    var range = b - a;
+    var sign = range >= 0 ? 1 : -1;
+    // TODO: Make this OK for really small numbers.
+    var extent = sign * probable.roll(Math.abs(range));
+    return a + extent;
+  }
 }
 
 
