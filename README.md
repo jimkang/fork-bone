@@ -23,20 +23,20 @@ Usage
     
     console.log(forkBone({
       line: [
-        [30, 50],
-        [0, 20]
+        [-50, 0],
+        [-9, 0]
       ],
-      lengthRange: [20, 48]
+      lengthRange: [5, 15]
     }));
 
 Output:
 
     [
-      [20, 20],
-      [20, 20]
+      [ 2.3339615604739095, -3.9422474992952727 ],
+      [ -5.620344845177656, 12.553004860768706 ]
     ]
 
-A graph of the bend with the resulting widen points:
+A graph of the line with the resulting fork:
 
 ![Example graph](https://raw.githubusercontent.com/jimkang/fork-bone/gh-pages/meta/example-case.png)
 
