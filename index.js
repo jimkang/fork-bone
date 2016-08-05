@@ -15,7 +15,6 @@ function ForkBone(createOpts) {
     var a;
     var b;
     var lengthRange;
-    var extensionExtent = 20;
 
     if (opts) {
       a = opts.line[0];
@@ -23,30 +22,23 @@ function ForkBone(createOpts) {
       lengthRange = opts.lengthRange;
     }
 
+    var forkLengthAlpha = lengthRange[0] + probable.roll(lengthRange[1]);
+    var forkLengthBeta = lengthRange[0] + probable.roll(lengthRange[1]);
+
     var ab = subtractPairs(b, a);
     var forkVectors = getForkVectors(ab);
 
     return [
-      addPairs(b, forkVectors[0]),
-      addPairs(b, forkVectors[1])
+      addPairs(b, changeVectorMagnitude(forkVectors[0], forkLengthAlpha)),
+      addPairs(b, changeVectorMagnitude(forkVectors[1], forkLengthBeta))
     ];
-
-    function normalizePointToAB(point) {
-      return point * magnitudeRatioABToBC;
-    }
   }
 
   function getForkVectors(guide) {
-    // var cExtension = probable.roll(extensionExtent);
-    // var dExtension = probable.roll(extensionExtent);
-    // var c = [0, 0];
-    // var d = [0, 0];
-
     return [
       [
         between(guide[0], guide[1]),
         between(guide[1], -guide[0])
-        // guide[1] + probable.roll(-guide[0] - guide[1])
       ],
       [
         between(guide[0], -guide[1]),
@@ -79,10 +71,6 @@ function subtractPairs(a, b) {
 
 function multiplyPairBySingleValue(pair, single) {
   return [pair[0] * single, pair[1] * single];
-}
-
-function getPerpendicularVector(v) {
-  return [-v[1], v[0]];
 }
 
 function changeVectorMagnitude(v, newMagnitude) {

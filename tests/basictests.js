@@ -11,17 +11,51 @@ var resultHTMLFragments = [];
 var testCases = [
   {
     name: '45 degree angle bone',
-    seed: 'asdf',
+    seed: 'qwer',
     opts: {
       line: [
         [30, 50],
         [0, 20]
       ],
-      lengthRange: [20, 48]
+      lengthRange: [20, 150]
     },
-    expected: [ [ -30, 25 ], [ -3, -10 ] ]
+    expected: [
+      [ -133.96312129524892, -38.05068589460786 ],
+      [ -18.992985614117416, -1.9149834009047098 ]
+    ]
   },
 
+  {
+    name: 'Vertical bone',
+    seed: 'asdf',
+    opts: {
+      line: [
+        [30, -100],
+        [30, 100]
+      ],
+      lengthRange: [48, 48]
+    },
+    expected: [
+      [ 65.61982915340042, 163.7199165966385 ],
+      [ -39.919059951033475, 129.78800187262965 ]
+    ]
+  },
+
+  {
+    name: 'Horizontal bone',
+    seed: 'asdf',
+    opts: {
+      line: [
+        [-50, 0],
+        [-9, 0]
+      ],
+      lengthRange: [5, 15]
+    },
+    expected: [
+      [ 2.3339615604739095, -3.9422474992952727 ],
+      [ -5.620344845177656, 12.553004860768706 ]
+    ]
+  }
 ];
 
 ((function go() {
