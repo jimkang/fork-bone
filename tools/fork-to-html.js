@@ -1,7 +1,7 @@
 const d3 = require('d3-shape');
 const scaleToFit = require('scale-to-fit');
 
-function bendToHTML(opts, done) {
+function bendToHTML(opts) {
   const {
     title,
     originalLine,

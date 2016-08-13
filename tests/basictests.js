@@ -1,3 +1,5 @@
+/* global __dirname */
+
 var test = require('tape');
 var ForkBone = require('../index');
 var forkToHTML = require('../tools/fork-to-html');
@@ -5,7 +7,7 @@ var fs = require('fs');
 var queue = require('d3-queue').queue;
 var seedrandom = require('seedrandom');
 
-const tolerance = 0.001;
+var tolerance = 0.001;
 var resultHTMLFragments = [];
 
 var testCases = [
@@ -76,7 +78,7 @@ var testCases = [
 ((function go() {
   var q = queue(1);
   testCases.forEach(queueTestRun);
-  q.awaitAll(writeOutHTMLFragments)
+  q.awaitAll(writeOutHTMLFragments);
 
   function queueTestRun(testCase) {
     q.defer(runTest, testCase);
@@ -147,7 +149,7 @@ function writeOutHTMLFragments() {
   </body>
   </html>
    `;
-   var filepath = __dirname + '/basic-test-results.html';
-   fs.writeFileSync(filepath, html);
+  var filepath = __dirname + '/basic-test-results.html';
+  fs.writeFileSync(filepath, html);
   console.log('Wrote rendered test results to', filepath);
 }
