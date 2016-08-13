@@ -22,6 +22,10 @@ function ForkBone(createOpts) {
       lengthRange = opts.lengthRange;
     }
 
+    if (!lengthRange) {
+      lengthRange = [10, 50];
+    }
+
     var forkLengthAlpha = lengthRange[0] + probable.roll(lengthRange[1]);
     var forkLengthBeta = lengthRange[0] + probable.roll(lengthRange[1]);
 
