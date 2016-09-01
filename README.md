@@ -40,6 +40,8 @@ A graph of the line with the resulting fork:
 
 ![Example graph](https://raw.githubusercontent.com/jimkang/fork-bone/gh-pages/meta/example-case.png)
 
+Pass `symmetrical: true` if you want the forks to be symmetrical.
+
 Tests
 -----
 

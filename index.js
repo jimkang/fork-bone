@@ -14,11 +14,13 @@ function ForkBone(createOpts) {
   function forkBone(opts) {
     var a;
     var b;
+    var symmetrical;
     var lengthRange;
 
     if (opts) {
       a = opts.line[0];
       b = opts.line[1];
+      symmetrical = opts.symmetrical;
       lengthRange = opts.lengthRange;
     }
 
@@ -30,7 +32,15 @@ function ForkBone(createOpts) {
     var forkLengthBeta = lengthRange[0] + probable.roll(lengthRange[1]);
 
     var ab = subtractPairs(b, a);
-    var forkVectors = getForkVectors(ab);
+    var forkVectors;
+
+    if (symmetrical) {
+      forkVectors = getSymmetricalForkVectors(ab);
+      forkLengthBeta = forkLengthAlpha;
+    }
+    else {
+      forkVectors = getForkVectors(ab);
+    }
 
     return [
       addPairs(b, changeVectorMagnitude(forkVectors[0], forkLengthAlpha)),
@@ -51,6 +61,25 @@ function ForkBone(createOpts) {
     ];
   }
 
+  function getSymmetricalForkVectors(boneDirection) {
+    var perpendicularMagnitude = probable.rollDie(100)/100;
+    var parallelMagnitude = probable.rollDie(100)/100;
+
+    var perpendicularVector = [
+      -boneDirection[1] * perpendicularMagnitude,
+      boneDirection[0] * perpendicularMagnitude
+    ];
+    var parallelVector = [
+      boneDirection[0] * parallelMagnitude,
+      boneDirection[1] * parallelMagnitude
+    ];
+
+    return [
+      addPairs(perpendicularVector, parallelVector),
+      addPairs(multiplyPairBySingleValue(perpendicularVector, -1), parallelVector)
+    ];
+  }
+
   function between(a, b) {
     var range = b - a;
     var sign = range >= 0 ? 1 : -1;
@@ -59,7 +88,6 @@ function ForkBone(createOpts) {
     return a + extent;
   }
 }
-
 
 function getVectorMagnitude(v) {
   return Math.sqrt(v[0] * v[0] + v[1] * v[1]);

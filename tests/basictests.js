@@ -12,6 +12,23 @@ var resultHTMLFragments = [];
 
 var testCases = [
   {
+    name: 'Symmetrical',
+    seed: 'parappa',
+    opts: {
+      symmetrical: true,
+      line: [
+        [30, 50],
+        [0, 20]
+      ],
+      lengthRange: [20, 150]
+    },
+    expected: [
+      [ 7.7227617625225955, 1.551180233973799 ],
+      [ -18.4488197660262, 27.722761762522595 ]
+    ]
+  },
+
+  {
     name: '45 degree angle bone',
     seed: 'qwer',
     opts: {
