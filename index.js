@@ -75,8 +75,8 @@ function ForkBone(createOpts) {
     ];
 
     return [
-      addPairs(perpendicularVector, parallelVector),
-      addPairs(multiplyPairBySingleValue(perpendicularVector, -1), parallelVector)
+      addPairs(multiplyPairBySingleValue(perpendicularVector, -1), parallelVector),
+      addPairs(perpendicularVector, parallelVector)
     ];
   }
 
