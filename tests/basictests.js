@@ -46,6 +46,24 @@ var testCases = [
   },
 
   {
+    name: 'Obtuse symmetrical',
+    seed: 'wsx',
+    opts: {
+      symmetrical: true,
+      obtuse: true,
+      line: [
+        [30, 50],
+        [0, 20]
+      ],
+      lengthRange: [20, 150]
+    },
+    expected: [
+      [ -124.56163732418891, 30.459374126458602 ],
+      [ 10.459374126458602, -104.56163732418891 ]
+    ]
+  },
+
+  {
     name: '45 degree angle bone',
     seed: 'qwer',
     opts: {

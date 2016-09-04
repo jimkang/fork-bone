@@ -37,7 +37,7 @@ function ForkBone(createOpts) {
     var forkVectors;
 
     if (symmetrical) {
-      forkVectors = getSymmetricalForkVectors(ab);
+      forkVectors = getSymmetricalForkVectors(ab, obtuse);
       forkLengthBeta = forkLengthAlpha;
     }
     else {
@@ -78,18 +78,26 @@ function ForkBone(createOpts) {
     ];
   }
 
-  function getSymmetricalForkVectors(boneDirection) {
+  function getSymmetricalForkVectors(boneDirection, obtuse) {
     var perpendicularMagnitude = probable.rollDie(100)/100;
-    var parallelMagnitude = probable.rollDie(100)/100;
+    var parallelMagnitude;
 
-    var perpendicularVector = [
-      -boneDirection[1] * perpendicularMagnitude,
-      boneDirection[0] * perpendicularMagnitude
-    ];
-    var parallelVector = [
-      boneDirection[0] * parallelMagnitude,
-      boneDirection[1] * parallelMagnitude
-    ];
+    if (obtuse) {
+      // parallelMagnitude should not be greater than perpendicularMagnitude.
+      parallelMagnitude = probable.rollDie(perpendicularMagnitude * 100)/100;
+    }
+    else {
+      parallelMagnitude = probable.rollDie(100)/100;
+    }
+
+    var perpX = -boneDirection[1] * perpendicularMagnitude;
+    var perpY = boneDirection[0] * perpendicularMagnitude;
+
+    var paraX = boneDirection[0] * parallelMagnitude;
+    var paraY = boneDirection[1] * parallelMagnitude;
+
+    var perpendicularVector = [perpX, perpY];
+    var parallelVector = [paraX, paraY];
 
     return [
       addPairs(multiplyPairBySingleValue(perpendicularVector, -1), parallelVector),
