@@ -1,6 +1,6 @@
 {
   "name": "fork-bone",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Given three points, a, b, and c, and a length p, finds two points that are length p away from b that sit on the bisecting line of the angle between lines ab and bc.",
   "main": "index.js",
   "scripts": {
