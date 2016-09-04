@@ -16,12 +16,14 @@ function ForkBone(createOpts) {
     var b;
     var symmetrical;
     var lengthRange;
+    var obtuse;
 
     if (opts) {
       a = opts.line[0];
       b = opts.line[1];
       symmetrical = opts.symmetrical;
       lengthRange = opts.lengthRange;
+      obtuse = opts.obtuse;
     }
 
     if (!lengthRange) {
@@ -39,7 +41,7 @@ function ForkBone(createOpts) {
       forkLengthBeta = forkLengthAlpha;
     }
     else {
-      forkVectors = getForkVectors(ab);
+      forkVectors = getForkVectors(ab, obtuse);
     }
 
     return [
@@ -48,15 +50,30 @@ function ForkBone(createOpts) {
     ];
   }
 
-  function getForkVectors(guide) {
+  function getForkVectors(guide, obtuse) {
+    var x0BoundA = guide[0];
+    var x0BoundB = guide[1];
+    var y0BoundA = guide[1];
+    var y0BoundB = -guide[0];
+
+    var x1BoundA = guide[0];
+    var x1BoundB = -guide[1];
+    var y1BoundA = guide[1];
+    var y1BoundB = guide[0];
+
+    if (obtuse) {
+      y0BoundA = 0;
+      x1BoundA = 0;
+    }
+
     return [
       [
-        between(guide[0], guide[1]),
-        between(guide[1], -guide[0])
+        between(x0BoundA, x0BoundB),
+        between(y0BoundA, y0BoundB)
       ],
       [
-        between(guide[0], -guide[1]),
-        between(guide[1], guide[0])
+        between(x1BoundA, x1BoundB),
+        between(y1BoundA, y1BoundB)
       ]
     ];
   }

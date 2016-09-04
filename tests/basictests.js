@@ -12,6 +12,23 @@ var resultHTMLFragments = [];
 
 var testCases = [
   {
+    name: 'Obtuse fork',
+    seed: 'qwer',
+    opts: {
+      line: [
+        [30, 50],
+        [0, 20]
+      ],
+      lengthRange: [20, 150],
+      obtuse: true
+    },
+    expected: [
+      [ -141.07030118178196, 57.61874698180852 ],
+      [ 1.929051305189444, -8.935769577841661 ]
+    ]
+  },
+
+  {
     name: 'Symmetrical',
     seed: 'parappa',
     opts: {
