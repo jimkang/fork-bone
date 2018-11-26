@@ -18,11 +18,14 @@
   },
   "homepage": "https://github.com/jimkang/fork-bone",
   "devDependencies": {
+    "browserify": "^16.2.3",
     "d3-queue": "^3.0.1",
     "d3-shape": "^1.0.0",
     "eslint": "^3.3.0",
     "scale-to-fit": "^1.0.3",
     "seedrandom": "^2.4.2",
+    "smokestack": "^3.6.0",
+    "tap-closer": "^1.0.0",
     "tape": "^4.6.0"
   },
   "dependencies": {

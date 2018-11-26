@@ -35,7 +35,6 @@ function ForkBone(createOpts) {
 
     var ab = subtractPairs(b, a);
     var forkVectors;
-
     if (symmetrical) {
       forkVectors = getSymmetricalForkVectors(ab, obtuse);
       forkLengthBeta = forkLengthAlpha;
@@ -44,9 +43,17 @@ function ForkBone(createOpts) {
       forkVectors = getForkVectors(ab, obtuse);
     }
 
+    // Avoid NaN while trying to change vector magnitudes.
+    if (forkVectors[0][0] !== 0.0 || forkVectors[0][1] !== 0.0) {
+      forkVectors[0] = changeVectorMagnitude(forkVectors[0], forkLengthAlpha);
+    }
+    if (forkVectors[1][0] !== 0.0 || forkVectors[1][1] !== 0.0) {
+      forkVectors[1] = changeVectorMagnitude(forkVectors[1], forkLengthBeta);
+    }
+
     return [
-      addPairs(b, changeVectorMagnitude(forkVectors[0], forkLengthAlpha)),
-      addPairs(b, changeVectorMagnitude(forkVectors[1], forkLengthBeta))
+      addPairs(b, forkVectors[0]),
+      addPairs(b, forkVectors[1])
     ];
   }
 

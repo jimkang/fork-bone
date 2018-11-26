@@ -124,6 +124,22 @@ var testCases = [
       [ -30.41348671995223, 0.7381250773635877 ],
       [ 21.633307652783937, -12.449961479175904 ]
     ]
+  },
+
+  {
+    name: '0-vector, avoid NaN',
+    seed: '2018-11-26T21:26:10.274Z',
+    opts: {
+      line: [
+        [95.5, 12],
+        [95.5, 12]
+      ],
+      lengthRange: [1, 1],
+      obtuse: true
+    },
+    expected: [
+ [ 95.5, 12 ], [ 95.5, 12 ] 
+    ]
   }
 ];
 
@@ -151,7 +167,7 @@ function runTest(testCase, done) {
       originalLine: testCase.opts.line,
       forkPoints: forkPoints
     }));
-    console.log(forkPoints);
+    console.log('forkPoints:', forkPoints);
     forkPoints.forEach(comparePair);
     t.end();
     done();
@@ -201,7 +217,9 @@ function writeOutHTMLFragments() {
   </body>
   </html>
    `;
-  var filepath = __dirname + '/basic-test-results.html';
-  fs.writeFileSync(filepath, html);
-  console.log('Wrote rendered test results to', filepath);
+  if (fs && fs.writeFileSync) {
+    var filepath = __dirname + '/basic-test-results.html';
+    fs.writeFileSync(filepath, html);
+    console.log('Wrote rendered test results to', filepath);
+  }
 }
