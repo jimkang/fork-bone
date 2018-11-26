@@ -38,8 +38,7 @@ function ForkBone(createOpts) {
     if (symmetrical) {
       forkVectors = getSymmetricalForkVectors(ab, obtuse);
       forkLengthBeta = forkLengthAlpha;
-    }
-    else {
+    } else {
       forkVectors = getForkVectors(ab, obtuse);
     }
 
@@ -51,10 +50,7 @@ function ForkBone(createOpts) {
       forkVectors[1] = changeVectorMagnitude(forkVectors[1], forkLengthBeta);
     }
 
-    return [
-      addPairs(b, forkVectors[0]),
-      addPairs(b, forkVectors[1])
-    ];
+    return [addPairs(b, forkVectors[0]), addPairs(b, forkVectors[1])];
   }
 
   function getForkVectors(guide, obtuse) {
@@ -74,27 +70,20 @@ function ForkBone(createOpts) {
     }
 
     return [
-      [
-        between(x0BoundA, x0BoundB),
-        between(y0BoundA, y0BoundB)
-      ],
-      [
-        between(x1BoundA, x1BoundB),
-        between(y1BoundA, y1BoundB)
-      ]
+      [between(x0BoundA, x0BoundB), between(y0BoundA, y0BoundB)],
+      [between(x1BoundA, x1BoundB), between(y1BoundA, y1BoundB)]
     ];
   }
 
   function getSymmetricalForkVectors(boneDirection, obtuse) {
-    var perpendicularMagnitude = probable.rollDie(100)/100;
+    var perpendicularMagnitude = probable.rollDie(100) / 100;
     var parallelMagnitude;
 
     if (obtuse) {
       // parallelMagnitude should not be greater than perpendicularMagnitude.
-      parallelMagnitude = probable.rollDie(perpendicularMagnitude * 100)/100;
-    }
-    else {
-      parallelMagnitude = probable.rollDie(100)/100;
+      parallelMagnitude = probable.rollDie(perpendicularMagnitude * 100) / 100;
+    } else {
+      parallelMagnitude = probable.rollDie(100) / 100;
     }
 
     var perpX = -boneDirection[1] * perpendicularMagnitude;
@@ -107,7 +96,10 @@ function ForkBone(createOpts) {
     var parallelVector = [paraX, paraY];
 
     return [
-      addPairs(multiplyPairBySingleValue(perpendicularVector, -1), parallelVector),
+      addPairs(
+        multiplyPairBySingleValue(perpendicularVector, -1),
+        parallelVector
+      ),
       addPairs(perpendicularVector, parallelVector)
     ];
   }
@@ -139,7 +131,7 @@ function multiplyPairBySingleValue(pair, single) {
 
 function changeVectorMagnitude(v, newMagnitude) {
   var currentMagnitude = getVectorMagnitude(v);
-  return multiplyPairBySingleValue(v, newMagnitude/currentMagnitude);
+  return multiplyPairBySingleValue(v, newMagnitude / currentMagnitude);
 }
 
 module.exports = ForkBone;

@@ -2,11 +2,7 @@ const d3 = require('d3-shape');
 const scaleToFit = require('scale-to-fit');
 
 function bendToHTML(opts) {
-  const {
-    title,
-    originalLine,
-    forkPoints
-  } = opts;
+  const { title, originalLine, forkPoints } = opts;
 
   const line = d3.line();
   line.curve(d3.curveLinear);
@@ -44,8 +40,12 @@ function bendToHTML(opts) {
         <path d=${line(originalLine)} class="original-line"></path>
         <path d=${line(branchC)} class="fork-line"></path>
         <path d=${line(branchD)} class="fork-line"></path>
-        <circle r="1" cx="${forkPoints[0][0]}" cy="${forkPoints[0][1]}" class="widen-point"></circle>
-        <circle r="1" cx="${forkPoints[1][0]}" cy="${forkPoints[1][1]}" class="widen-point"></circle>
+        <circle r="1" cx="${forkPoints[0][0]}" cy="${
+    forkPoints[0][1]
+  }" class="widen-point"></circle>
+        <circle r="1" cx="${forkPoints[1][0]}" cy="${
+    forkPoints[1][1]
+  }" class="widen-point"></circle>
       </g>
     </svg>
     `;
@@ -62,15 +62,13 @@ function getBounds(points) {
   function updateBoundsForPoint(point) {
     if (point[0] < left) {
       left = point[0];
-    }
-    else if (point[0] > right) {
+    } else if (point[0] > right) {
       right = point[0];
     }
 
     if (point[1] < top) {
       top = point[1];
-    }
-    else if (point[1] > bottom) {
+    } else if (point[1] > bottom) {
       bottom = point[1];
     }
   }

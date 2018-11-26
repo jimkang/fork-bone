@@ -15,16 +15,13 @@ var testCases = [
     name: 'Obtuse fork',
     seed: 'qwer',
     opts: {
-      line: [
-        [30, 50],
-        [0, 20]
-      ],
+      line: [[30, 50], [0, 20]],
       lengthRange: [20, 150],
       obtuse: true
     },
     expected: [
-      [ -141.07030118178196, 57.61874698180852 ],
-      [ 1.929051305189444, -8.935769577841661 ]
+      [-141.07030118178196, 57.61874698180852],
+      [1.929051305189444, -8.935769577841661]
     ]
   },
 
@@ -33,15 +30,12 @@ var testCases = [
     seed: 'parappa',
     opts: {
       symmetrical: true,
-      line: [
-        [30, 50],
-        [0, 20]
-      ],
+      line: [[30, 50], [0, 20]],
       lengthRange: [20, 150]
     },
     expected: [
-      [ -18.4488197660262, 27.722761762522595 ],
-      [ 7.7227617625225955, 1.551180233973799 ]
+      [-18.4488197660262, 27.722761762522595],
+      [7.7227617625225955, 1.551180233973799]
     ]
   },
 
@@ -51,15 +45,12 @@ var testCases = [
     opts: {
       symmetrical: true,
       obtuse: true,
-      line: [
-        [30, 50],
-        [0, 20]
-      ],
+      line: [[30, 50], [0, 20]],
       lengthRange: [20, 150]
     },
     expected: [
-      [ -124.56163732418891, 30.459374126458602 ],
-      [ 10.459374126458602, -104.56163732418891 ]
+      [-124.56163732418891, 30.459374126458602],
+      [10.459374126458602, -104.56163732418891]
     ]
   },
 
@@ -67,15 +58,12 @@ var testCases = [
     name: '45 degree angle bone',
     seed: 'qwer',
     opts: {
-      line: [
-        [30, 50],
-        [0, 20]
-      ],
+      line: [[30, 50], [0, 20]],
       lengthRange: [20, 150]
     },
     expected: [
-      [ -133.96312129524892, -38.05068589460786 ],
-      [ -18.992985614117416, -1.9149834009047098 ]
+      [-133.96312129524892, -38.05068589460786],
+      [-18.992985614117416, -1.9149834009047098]
     ]
   },
 
@@ -83,15 +71,12 @@ var testCases = [
     name: 'Vertical bone',
     seed: 'asdf',
     opts: {
-      line: [
-        [30, -100],
-        [30, 100]
-      ],
+      line: [[30, -100], [30, 100]],
       lengthRange: [48, 48]
     },
     expected: [
-      [ 65.61982915340042, 163.7199165966385 ],
-      [ -39.919059951033475, 129.78800187262965 ]
+      [65.61982915340042, 163.7199165966385],
+      [-39.919059951033475, 129.78800187262965]
     ]
   },
 
@@ -99,15 +84,12 @@ var testCases = [
     name: 'Horizontal bone',
     seed: 'asdf',
     opts: {
-      line: [
-        [-50, 0],
-        [-9, 0]
-      ],
+      line: [[-50, 0], [-9, 0]],
       lengthRange: [5, 15]
     },
     expected: [
-      [ 2.3339615604739095, -3.9422474992952727 ],
-      [ -5.620344845177656, 12.553004860768706 ]
+      [2.3339615604739095, -3.9422474992952727],
+      [-5.620344845177656, 12.553004860768706]
     ]
   },
 
@@ -115,14 +97,11 @@ var testCases = [
     name: 'No length range',
     seed: 'asdf',
     opts: {
-      line: [
-        [30, 50],
-        [0, 20]
-      ]
+      line: [[30, 50], [0, 20]]
     },
     expected: [
-      [ -30.41348671995223, 0.7381250773635877 ],
-      [ 21.633307652783937, -12.449961479175904 ]
+      [-30.41348671995223, 0.7381250773635877],
+      [21.633307652783937, -12.449961479175904]
     ]
   },
 
@@ -130,20 +109,15 @@ var testCases = [
     name: '0-vector, avoid NaN',
     seed: '2018-11-26T21:26:10.274Z',
     opts: {
-      line: [
-        [95.5, 12],
-        [95.5, 12]
-      ],
+      line: [[95.5, 12], [95.5, 12]],
       lengthRange: [1, 1],
       obtuse: true
     },
-    expected: [
- [ 95.5, 12 ], [ 95.5, 12 ] 
-    ]
+    expected: [[95.5, 12], [95.5, 12]]
   }
 ];
 
-((function go() {
+(function go() {
   var q = queue(1);
   testCases.forEach(queueTestRun);
   q.awaitAll(writeOutHTMLFragments);
@@ -151,7 +125,7 @@ var testCases = [
   function queueTestRun(testCase) {
     q.defer(runTest, testCase);
   }
-})());
+})();
 
 function runTest(testCase, done) {
   test(testCase.name, basicTest);
@@ -162,11 +136,13 @@ function runTest(testCase, done) {
     });
     var forkPoints = forkBone(testCase.opts);
 
-    resultHTMLFragments.push(forkToHTML({
-      title: testCase.name,
-      originalLine: testCase.opts.line,
-      forkPoints: forkPoints
-    }));
+    resultHTMLFragments.push(
+      forkToHTML({
+        title: testCase.name,
+        originalLine: testCase.opts.line,
+        forkPoints: forkPoints
+      })
+    );
     console.log('forkPoints:', forkPoints);
     forkPoints.forEach(comparePair);
     t.end();
@@ -175,7 +151,7 @@ function runTest(testCase, done) {
     function comparePair(pair, i) {
       t.ok(
         Math.abs(pair[0] - testCase.expected[i][0]) < tolerance &&
-        Math.abs(pair[1] - testCase.expected[i][1]) < tolerance,
+          Math.abs(pair[1] - testCase.expected[i][1]) < tolerance,
         'Fork point is correct.'
       );
     }
