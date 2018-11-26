@@ -42,6 +42,12 @@ A graph of the line with the resulting fork:
 
 Pass `symmetrical: true` if you want the forks to be symmetrical.
 Pass `obtuse: true` if you want the forks to have an obtuse angle between them.
+Pass a two-element array in `lengthRange` if you want to define the fork length range. The first element should be the bottom of the range, and the second should be the top.
+
+When creating `ForkBone`, you can optionally pass two opts:
+
+  - `random`: A function that behaves like `Math.random`. You can substitute one created by [seedrandom](https://github.com/davidbau/seedrandom) or something you've written yourself. Helps with situations in which you want reproducible results.
+  - `numberOfDecimalsToConsider`: A positive number that tells it how precise to be when picking numbers in a range. If it encounters a range of 0.001, by default, it will always pick 0. (If the range is 100, it'll pick a whole number between 0 and 99.) If you specify 3 as `numberOfDecimalsToConsider`, it can pick numbers like 0.003 and 0.995. Useful for working for points that are really close together.
 
 Tests
 -----

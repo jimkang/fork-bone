@@ -2,8 +2,11 @@ var createProbable = require('probable').createProbable;
 
 function ForkBone(createOpts) {
   var random;
+  var numberOfDecimalsToConsider;
+
   if (createOpts) {
     random = createOpts.random;
+    numberOfDecimalsToConsider = createOpts.numberOfDecimalsToConsider;
   }
   var probable = createProbable({
     random: random
@@ -109,8 +112,13 @@ function ForkBone(createOpts) {
   function between(a, b) {
     var range = b - a;
     var sign = range >= 0 ? 1 : -1;
-    // TODO: Make this OK for really small numbers.
-    var extent = sign * probable.roll(Math.abs(range));
+    var precisionFactor = 1;
+    if (numberOfDecimalsToConsider) {
+      precisionFactor = Math.pow(10, numberOfDecimalsToConsider);
+    }
+    var extent =
+      sign *
+      (probable.roll(Math.abs(range * precisionFactor)) / precisionFactor);
     return a + extent;
   }
 }

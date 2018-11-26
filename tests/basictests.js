@@ -114,6 +114,23 @@ var testCases = [
       obtuse: true
     },
     expected: [[95.5, 12], [95.5, 12]]
+  },
+
+  {
+    name: 'Handle really small differences',
+    seed: '2018-11-26T21:26:10.274Z',
+    opts: {
+      line: [[95.5, 12], [95.50000001, 12.0000001]],
+      lengthRange: [1, 1],
+      obtuse: true
+    },
+    createOpts: {
+      numberOfDecimalsToConsider: 8
+    },
+    expected: [
+      [96.50000001, 12.0000001],
+      [95.38956848318853, 12.993883834591772]
+    ]
   }
 ];
 
@@ -132,7 +149,10 @@ function runTest(testCase, done) {
 
   function basicTest(t) {
     var forkBone = ForkBone({
-      random: seedrandom(testCase.seed)
+      random: seedrandom(testCase.seed),
+      numberOfDecimalsToConsider: testCase.createOpts
+        ? testCase.createOpts.numberOfDecimalsToConsider
+        : null
     });
     var forkPoints = forkBone(testCase.opts);
 
