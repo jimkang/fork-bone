@@ -30,8 +30,10 @@ function ForkBone(createOpts) {
       lengthRange = [10, 50];
     }
 
-    var forkLengthAlpha = lengthRange[0] + probable.roll(lengthRange[1]);
-    var forkLengthBeta = lengthRange[0] + probable.roll(lengthRange[1]);
+    var forkLengthAlpha =
+      lengthRange[0] + probable.roll(lengthRange[1] - lengthRange[0]);
+    var forkLengthBeta =
+      lengthRange[0] + probable.roll(lengthRange[1] - lengthRange[0]);
 
     var ab = subtractPairs(b, a);
     var forkVectors;
