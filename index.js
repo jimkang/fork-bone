@@ -63,8 +63,8 @@ function ForkBone(createOpts) {
 
   function getForkVectors(guide, angleRange) {
     return [
-      getForkVector(guide, between(angleRange[0], angleRange[1]), true),
-      getForkVector(guide, between(angleRange[0], angleRange[1]), false)
+      getForkVector(guide, between(angleRange[0], angleRange[1]), false),
+      getForkVector(guide, between(angleRange[0], angleRange[1]), true)
     ];
   }
 
@@ -84,8 +84,8 @@ function ForkBone(createOpts) {
   function getSymmetricalForkVectors(guide, angleRange) {
     const angle = between(angleRange[0], angleRange[1]);
     return [
-      getForkVector(guide, angle, true),
-      getForkVector(guide, angle, false)
+      getForkVector(guide, angle, false),
+      getForkVector(guide, angle, true)
     ];
   }
 
