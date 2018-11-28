@@ -7,7 +7,6 @@ var fs = require('fs');
 var queue = require('d3-queue').queue;
 var seedrandom = require('seedrandom');
 
-var tolerance = 0.001;
 var resultHTMLFragments = [];
 
 var testCases = [
@@ -17,12 +16,18 @@ var testCases = [
     opts: {
       line: [[30, 50], [0, 20]],
       lengthRange: [20, 150],
-      obtuse: true
-    },
-    expected: [
-      [-124.64430720856078, 53.23848192228287],
-      [1.8625322946656702, -7.937984419985053]
-    ]
+      angleRange: [60, 85]
+    }
+  },
+
+  {
+    name: 'Acute fork',
+    seed: 'qwer',
+    opts: {
+      line: [[30, 50], [0, 20]],
+      lengthRange: [20, 50],
+      angleRange: [2, 30]
+    }
   },
 
   {
@@ -32,11 +37,7 @@ var testCases = [
       symmetrical: true,
       line: [[30, 50], [0, 20]],
       lengthRange: [20, 150]
-    },
-    expected: [
-      [-18.4488197660262, 27.722761762522595],
-      [7.7227617625225955, 1.551180233973799]
-    ]
+    }
   },
 
   {
@@ -44,14 +45,10 @@ var testCases = [
     seed: 'wsx',
     opts: {
       symmetrical: true,
-      obtuse: true,
+      angleRange: [60, 80],
       line: [[30, 50], [0, 20]],
       lengthRange: [20, 150]
-    },
-    expected: [
-      [-110.61073394387975, 29.28792422429524],
-      [9.287924224295239, -90.61073394387975]
-    ]
+    }
   },
 
   {
@@ -60,11 +57,7 @@ var testCases = [
     opts: {
       line: [[30, 50], [0, 20]],
       lengthRange: [20, 150]
-    },
-    expected: [
-      [-118.3646756649802, -31.29135945482475],
-      [-18.33805507569957, -1.1592943181148918]
-    ]
+    }
   },
 
   {
@@ -73,11 +66,7 @@ var testCases = [
     opts: {
       line: [[30, -100], [30, 100]],
       lengthRange: [48, 48]
-    },
-    expected: [
-      [53.42125752552356, 141.89802735121435],
-      [-14.159406284863252, 118.813474866924]
-    ]
+    }
   },
 
   {
@@ -86,11 +75,7 @@ var testCases = [
     opts: {
       line: [[-50, 0], [-9, 0]],
       lengthRange: [5, 15]
-    },
-    expected: [
-      [0.44496796706159003, -3.285206249412727],
-      [-6.4002652655212735, 9.656157585206696]
-    ]
+    }
   },
 
   {
@@ -98,11 +83,7 @@ var testCases = [
     seed: 'asdf',
     opts: {
       line: [[30, 50], [0, 20]]
-    },
-    expected: [
-      [-26.18939134218109, 3.4133854832853103],
-      [18.305106475432563, -7.457659713148843]
-    ]
+    }
   },
 
   {
@@ -111,9 +92,8 @@ var testCases = [
     opts: {
       line: [[95.5, 12], [95.5, 12]],
       lengthRange: [1, 1],
-      obtuse: true
-    },
-    expected: [[95.5, 12], [95.5, 12]]
+      angleRange: [4, 70]
+    }
   },
 
   {
@@ -121,16 +101,11 @@ var testCases = [
     seed: '2018-11-26T21:26:10.274Z',
     opts: {
       line: [[95.5, 12], [95.50000001, 12.0000001]],
-      lengthRange: [1, 1],
-      obtuse: true
+      lengthRange: [1, 1]
     },
     createOpts: {
       numberOfDecimalsToConsider: 8
-    },
-    expected: [
-      [96.50000001, 12.0000001],
-      [95.38956848318853, 12.993883834591772]
-    ]
+    }
   }
 ];
 
@@ -164,16 +139,13 @@ function runTest(testCase, done) {
       })
     );
     console.log('forkPoints:', forkPoints);
-    forkPoints.forEach(comparePair);
+    forkPoints.forEach(checkPair);
     t.end();
     done();
 
-    function comparePair(pair, i) {
-      t.ok(
-        Math.abs(pair[0] - testCase.expected[i][0]) < tolerance &&
-          Math.abs(pair[1] - testCase.expected[i][1]) < tolerance,
-        'Fork point is correct.'
-      );
+    function checkPair(pair) {
+      t.ok(!isNaN(pair[0]), 'x is valid.');
+      t.ok(!isNaN(pair[1]), 'y is valid.');
     }
   }
 }

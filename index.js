@@ -19,18 +19,21 @@ function ForkBone(createOpts) {
     var b;
     var symmetrical;
     var lengthRange;
-    var obtuse;
+    var angleRange;
 
     if (opts) {
       a = opts.line[0];
       b = opts.line[1];
       symmetrical = opts.symmetrical;
       lengthRange = opts.lengthRange;
-      obtuse = opts.obtuse;
+      angleRange = opts.angleRange;
     }
 
     if (!lengthRange) {
       lengthRange = [10, 50];
+    }
+    if (!angleRange) {
+      angleRange = [1, 89];
     }
 
     var forkLengthAlpha =
@@ -41,10 +44,10 @@ function ForkBone(createOpts) {
     var ab = subtractPairs(b, a);
     var forkVectors;
     if (symmetrical) {
-      forkVectors = getSymmetricalForkVectors(ab, obtuse);
+      forkVectors = getSymmetricalForkVectors(ab, angleRange);
       forkLengthBeta = forkLengthAlpha;
     } else {
-      forkVectors = getForkVectors(ab, obtuse);
+      forkVectors = getForkVectors(ab, angleRange);
     }
 
     // Avoid NaN while trying to change vector magnitudes.
@@ -58,54 +61,31 @@ function ForkBone(createOpts) {
     return [addPairs(b, forkVectors[0]), addPairs(b, forkVectors[1])];
   }
 
-  function getForkVectors(guide, obtuse) {
-    var x0BoundA = guide[0];
-    var x0BoundB = guide[1];
-    var y0BoundA = guide[1];
-    var y0BoundB = -guide[0];
-
-    var x1BoundA = guide[0];
-    var x1BoundB = -guide[1];
-    var y1BoundA = guide[1];
-    var y1BoundB = guide[0];
-
-    if (obtuse) {
-      y0BoundA = 0;
-      x1BoundA = 0;
-    }
-
+  function getForkVectors(guide, angleRange) {
     return [
-      [between(x0BoundA, x0BoundB), between(y0BoundA, y0BoundB)],
-      [between(x1BoundA, x1BoundB), between(y1BoundA, y1BoundB)]
+      getForkVector(guide, between(angleRange[0], angleRange[1]), true),
+      getForkVector(guide, between(angleRange[0], angleRange[1]), false)
     ];
   }
 
-  function getSymmetricalForkVectors(boneDirection, obtuse) {
-    var perpendicularMagnitude = probable.rollDie(100) / 100;
-    var parallelMagnitude;
-
-    if (obtuse) {
-      // parallelMagnitude should not be greater than perpendicularMagnitude.
-      parallelMagnitude = probable.rollDie(perpendicularMagnitude * 100) / 100;
-    } else {
-      parallelMagnitude = probable.rollDie(100) / 100;
+  function getForkVector(guide, angleInDegrees, toTheLeft) {
+    var angle = (angleInDegrees * Math.PI) / 180;
+    if (!toTheLeft) {
+      angle = -angle;
     }
-
-    var perpX = -boneDirection[1] * perpendicularMagnitude;
-    var perpY = boneDirection[0] * perpendicularMagnitude;
-
-    var paraX = boneDirection[0] * parallelMagnitude;
-    var paraY = boneDirection[1] * parallelMagnitude;
-
-    var perpendicularVector = [perpX, perpY];
-    var parallelVector = [paraX, paraY];
-
+    const cosAngle = Math.cos(angle);
+    const sinAngle = Math.sin(angle);
     return [
-      addPairs(
-        multiplyPairBySingleValue(perpendicularVector, -1),
-        parallelVector
-      ),
-      addPairs(perpendicularVector, parallelVector)
+      guide[0] * cosAngle - guide[1] * sinAngle,
+      guide[1] * cosAngle + guide[0] * sinAngle
+    ];
+  }
+
+  function getSymmetricalForkVectors(guide, angleRange) {
+    const angle = between(angleRange[0], angleRange[1]);
+    return [
+      getForkVector(guide, angle, true),
+      getForkVector(guide, angle, false)
     ];
   }
 

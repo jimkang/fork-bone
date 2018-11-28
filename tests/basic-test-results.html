@@ -1,0 +1,143 @@
+<html>
+  <head>
+    <title>Result graphs of basictests.js</title>
+    <style>
+        body {
+          font-family: "Helvetica Neue", sans-serif;
+        }
+
+        path {
+          fill: none;
+          stroke-width: 1;
+        }
+
+        .original-line {
+          stroke: #333;
+        }
+
+        .fork-line {
+          stroke: hsl(327, 69%, 48%);
+          stroke-dashoffset: 10;
+          stroke-dasharray: 3, 2;
+        }
+
+        .fork-point {
+          fill: hsla(327, 80%, 50%, 0.8);
+        }
+    </style>
+  </head>
+
+  <body>
+    <p>Obtuse fork</p>
+    <svg width="480" height="480">
+      <g transform="matrix(2.9410444137795664 0 0 2.9410444137795664 96.35288908856717 312.9477793110217)">
+        <path d=M30,50L0,20 class="original-line"></path>
+        <path d=M0,20L48.32425055065263,-99.60671723911557 class="fork-line"></path>
+        <path d=M0,20L-25.961147927870048,30.48898461564553 class="fork-line"></path>
+        <circle r="1" cx="48.32425055065263" cy="-99.60671723911557" class="widen-point"></circle>
+        <circle r="1" cx="-25.961147927870048" cy="30.48898461564553" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  <p>Acute fork</p>
+    <svg width="480" height="480">
+      <g transform="matrix(6.580734046274626 0 0 6.580734046274626 189.85492922762901 130.96329768626873)">
+        <path d=M30,50L0,20 class="original-line"></path>
+        <path d=M0,20L-25.810939635797073,-16.861841993004624 class="fork-line"></path>
+        <path d=M0,20L-17.202192930068826,7.954894836628032 class="fork-line"></path>
+        <circle r="1" cx="-25.810939635797073" cy="-16.861841993004624" class="widen-point"></circle>
+        <circle r="1" cx="-17.202192930068826" cy="7.954894836628032" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  <p>Symmetrical</p>
+    <svg width="480" height="480">
+      <g transform="matrix(8.8 0 0 8.8 194.2871800985164 20)">
+        <path d=M30,50L0,20 class="original-line"></path>
+        <path d=M0,20L2.7834620192013086,0.19463862516859365 class="fork-line"></path>
+        <path d=M0,20L-19.805361374831406,22.78346201920131 class="fork-line"></path>
+        <circle r="1" cx="2.7834620192013086" cy="0.19463862516859365" class="widen-point"></circle>
+        <circle r="1" cx="-19.805361374831406" cy="22.78346201920131" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  <p>Obtuse symmetrical</p>
+    <svg width="480" height="480">
+      <g transform="matrix(2.915902933760384 0 0 2.915902933760384 303.0839848669377 244.76592619173007)">
+        <path d=M30,50L0,20 class="original-line"></path>
+        <path d=M0,20L53.81386784734341,-77.08278749247293 class="fork-line"></path>
+        <path d=M0,20L-97.08278749247293,73.8138678473434 class="fork-line"></path>
+        <circle r="1" cx="53.81386784734341" cy="-77.08278749247293" class="widen-point"></circle>
+        <circle r="1" cx="-97.08278749247293" cy="73.8138678473434" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  <p>45 degree angle bone</p>
+    <svg width="480" height="480">
+      <g transform="matrix(2.8817256497946584 0 0 2.8817256497946584 134.87478365974317 315.91371751026713)">
+        <path d=M30,50L0,20 class="original-line"></path>
+        <path d=M0,20L-39.86319227436822,-102.6862906020748 class="fork-line"></path>
+        <path d=M0,20L-26.6295824562643,11.347524157501471 class="fork-line"></path>
+        <circle r="1" cx="-39.86319227436822" cy="-102.6862906020748" class="widen-point"></circle>
+        <circle r="1" cx="-26.6295824562643" cy="11.347524157501471" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  <p>Vertical bone</p>
+    <svg width="480" height="480">
+      <g transform="matrix(1.7911610962438904 0 0 1.7911610962438904 21.529302774353603 199.11610962438905)">
+        <path d=M30,-100L30,100 class="original-line"></path>
+        <path d=M30,100L-0.8538052649538841,136.77013326971095 class="fork-line"></path>
+        <path d=M30,100L44.83281572999748,145.65071278216737 class="fork-line"></path>
+        <circle r="1" cx="-0.8538052649538841" cy="136.77013326971095" class="widen-point"></circle>
+        <circle r="1" cx="44.83281572999748" cy="145.65071278216737" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  <p>Horizontal bone</p>
+    <svg width="480" height="480">
+      <g transform="matrix(8.711048838604778 0 0 8.711048838604778 455.5524419302389 46.91862129959024)">
+        <path d=M-50,0L-9,0 class="original-line"></path>
+        <path d=M-9,0L-1.33955556881022,6.4278760968653925 class="fork-line"></path>
+        <path d=M-9,0L0.5105651629515346,-3.0901699437494736 class="fork-line"></path>
+        <circle r="1" cx="-1.33955556881022" cy="6.4278760968653925" class="widen-point"></circle>
+        <circle r="1" cx="0.5105651629515346" cy="-3.0901699437494736" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  <p>No length range</p>
+    <svg width="480" height="480">
+      <g transform="matrix(7.227090805498887 0 0 7.227090805498887 232.4997069338421 98.64545972505564)">
+        <path d=M30,50L0,20 class="original-line"></path>
+        <path d=M0,20L-2.701828025177404,-10.882035640844109 class="fork-line"></path>
+        <path d=M0,20L-29.403215298216143,5.018313508594954 class="fork-line"></path>
+        <circle r="1" cx="-2.701828025177404" cy="-10.882035640844109" class="widen-point"></circle>
+        <circle r="1" cx="-29.403215298216143" cy="5.018313508594954" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  <p>0-vector, avoid NaN</p>
+    <svg width="480" height="480">
+      <g transform="matrix(4.607329842931938 0 0 4.607329842931938 20 20)">
+        <path d=M95.5,12L95.5,12 class="original-line"></path>
+        <path d=M95.5,12L95.5,12 class="fork-line"></path>
+        <path d=M95.5,12L95.5,12 class="fork-line"></path>
+        <circle r="1" cx="95.5" cy="12" class="widen-point"></circle>
+        <circle r="1" cx="95.5" cy="12" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  <p>Handle really small differences</p>
+    <svg width="480" height="480">
+      <g transform="matrix(4.572878122477675 0 0 4.572878122477675 20 20)">
+        <path d=M95.5,12L95.50000001,12.0000001 class="original-line"></path>
+        <path d=M95.50000001,12.0000001L94.68089547386373,12.573644379044936 class="fork-line"></path>
+        <path d=M95.50000001,12.0000001L96.21948983009399,12.694503086877027 class="fork-line"></path>
+        <circle r="1" cx="94.68089547386373" cy="12.573644379044936" class="widen-point"></circle>
+        <circle r="1" cx="96.21948983009399" cy="12.694503086877027" class="widen-point"></circle>
+      </g>
+    </svg>
+    
+  </body>
+  </html>
+   

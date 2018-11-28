@@ -41,7 +41,7 @@ A graph of the line with the resulting fork:
 ![Example graph](https://raw.githubusercontent.com/jimkang/fork-bone/gh-pages/meta/example-case.png)
 
 Pass `symmetrical: true` if you want the forks to be symmetrical.
-Pass `obtuse: true` if you want the forks to have an obtuse angle between them.
+Pass `angleRange: [<lower bound in degrees>, <upper bound>` if you want to have a particular angle away from ray extending from the end of the bone. For example, `[30, 45]` will result in forks that are between 60 and 90 degrees apart from each other.
 Pass a two-element array in `lengthRange` if you want to define the fork length range. The first element should be the bottom of the range, and the second should be the top.
 
 When creating `ForkBone`, you can optionally pass two opts:
